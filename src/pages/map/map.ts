@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
-import  Leaflet  from 'leaflet';
+import 'leaflet';
 
 @Component({
   selector: 'page-map',
@@ -10,27 +11,46 @@ import  Leaflet  from 'leaflet';
 
 export class MapPage {
 
-  constructor(public navCtrl: NavController) {
+  map: any;
+
+  constructor(public navCtrl: NavController, public geolocation: Geolocation) {
 
   }
+  
+  findLocation()
+  {
+    this.map.locate({setView: true, maxZoom: 16});
+  }
+
   ngOnInit(): void {
-
-    var map = L.map('map').setView([51.505, -0.09], 13);
-
+    console.log(this.geolocation.getCurrentPosition());
+    this.map = L.map('map').setView([51.505, -0.09], 13);
+    let map = this.map;
+    
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZnJhbmt3YW4yNyIsImEiOiJjajVrcGxrY3kyamlvMzJuem81dHA2dDB5In0.vraVi60phGPP7W46hBnvCA'
     }).addTo(map);
 
-  // this.map = Leaflet.map('map')
-  //   .setView([51.505, -0.09], 13);
+    map.locate({setView: true, maxZoom: 16});
 
-  // L.tileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-  //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, Tiles courtesy of <a href="http://hot.openstreetmap.org/" target="_blank">Humanitarian OpenStreetMap Team</a>',
-  //     maxZoom: 18
-  //   }
+
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    function onLocationFound(e)
+    {
+        var radius = e.accuracy / 2;
+
+        L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point").openPopup();  
+        L.circle(e.latlng, radius).addTo(map);
+    }
+
+    function onLocationError(e) {
+      alert( "sad :( " + e.message);
+    }
   }
 }
 
