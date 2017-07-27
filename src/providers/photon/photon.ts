@@ -13,29 +13,47 @@ export class PhotonProvider {
   public data: any;
 
   constructor(public http: Http) {
-    console.log('Hello PhotonProvider Provider');
 
   }
 
-  load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
-    }
-
+  autocomplete(query: any) {
     // don't have the data yet
     return new Promise(resolve => {
       // We're using Angular HTTP provider to request the data,
       // then on the response, it'll map the JSON data to a parsed JS object.
       // Next, we process the data and resolve the promise with the new data.
-      this.http.get('https://photon.komoot.de/api/?q=berlin')
+      this.http.get('https://photon.komoot.de/api/?q=' + query + '&limit=10')
         .map(res => res.json())
         .subscribe(data => {
           // we've got back the raw data, now generate the core schedule data
           // and save the data for later reference
           this.data = data;
           resolve(this.data);
-          console.log(this.data);
+          for(let i = 0; i < 10; i++)
+          {
+            let name = '', street = '', city = '', state = '', country = '';
+
+            
+            if(this.data.features[i].properties.name != undefined)
+              name = 'Name: ' + this.data.features[i].properties.name;
+            
+            if(this.data.features[i].properties.street != undefined) 
+              street = ', Street: ' + this.data.features[i].properties.street;
+            
+            if(this.data.features[i].properties.city != undefined)
+              city = ', City: ' + this.data.features[i].properties.city;
+            
+            if(this.data.features[i].properties.state != undefined)
+              state = ', State: ' + this.data.features[i].properties.state;
+            
+            if(this.data.features[i].properties.country != undefined)
+              country = ', Country: ' + this.data.features[i].properties.country;
+
+            // if(name == city) state = '';
+            // if(state == country) country = '';
+
+            console.log(name + street + city + state + country);
+          }
         });
     });
   }

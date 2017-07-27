@@ -11,8 +11,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 export class MapPage {
 
-  map: any;
-  M: any;
+  public map: any;
+
   constructor(public navCtrl: NavController, public geolocation: Geolocation) {
 
   }
@@ -26,7 +26,6 @@ export class MapPage {
     // M.Mapzen.apiKey = "mapzen-5ZktmUZ";
     // var geocoder = M.Mapzen.geocoder();
 
-    console.log(this.geolocation.getCurrentPosition());
     this.map = L.map('map').setView([37.7749, -122.4194], 12);
     let map = this.map;
 
@@ -39,6 +38,7 @@ export class MapPage {
     }).addTo(map);
 
     map.locate({setView: true, maxZoom: 16});
+    console.log("My Location: " + this.geolocation.getCurrentPosition());
 
 
 

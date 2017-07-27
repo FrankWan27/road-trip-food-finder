@@ -6,22 +6,29 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor= "let post of posts">
-      <img [src]="post.data.url" />
-    </ion-item>
-    <ion-item>
+    <!-- I like these labels :c -->
+    
+    <!-- <ion-item>
       <ion-label floating>Starting Point</ion-label>
-      <ion-input type="text">My Location</ion-input>
+      <ion-input type="text" value="My Location" name="start" id="start" (ionInput)="autocomplete()"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label floating>Destination</ion-label>
       <ion-input type="text"></ion-input>
+    </ion-item> -->
+    
+    <ion-item>
+      <ion-searchbar placeholder="Starting Point" [(ngModel)]="start" (ionInput)="autocomplete($event)"></ion-searchbar>
     </ion-item>
-
+    
+    <ion-item>
+      <ion-searchbar placeholder="Destination" [(ngModel)]="end" (ionInput)="autocomplete($event)"></ion-searchbar>
+    </ion-item>
+  
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block>Search</button>
+    <button ion-button color="primary" block (click)="search()">Search</button>
   </div>
 </ion-content>

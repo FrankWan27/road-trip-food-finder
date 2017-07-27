@@ -5,12 +5,22 @@ import { PhotonProvider } from '../../providers/photon/photon';
 @Component({
   selector: 'page-route',
   templateUrl: 'route.html',
-  // providers: [PhotonProvider]
 })
 
 export class RoutePage {
-  public json: any;
+  
   constructor(public navCtrl: NavController, public photon: PhotonProvider) {
-        photon.load();
+
   }
+  
+  autocomplete(e: any)
+  {
+    this.photon.autocomplete(e.target.value);
+  }
+
+  search()
+  {
+
+  }
+
 }
