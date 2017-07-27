@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PhotonProvider } from '../../providers/photon/photon';
 
@@ -8,7 +8,10 @@ import { PhotonProvider } from '../../providers/photon/photon';
 })
 
 export class RoutePage {
-  
+
+  start: string = "";
+  end: string = "";
+
   constructor(public navCtrl: NavController, public photon: PhotonProvider) {
 
   }
@@ -20,7 +23,10 @@ export class RoutePage {
 
   search()
   {
+    let start = this.start;
+    let end = this.end;
 
+    alert(start + " " + end);
   }
 
 }
