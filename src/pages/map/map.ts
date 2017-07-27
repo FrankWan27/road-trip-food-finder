@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
-import 'leaflet';
+ import L from 'leaflet';
 
 @Component({
   selector: 'page-map',
@@ -12,7 +12,7 @@ import 'leaflet';
 export class MapPage {
 
   map: any;
-
+  M: any;
   constructor(public navCtrl: NavController, public geolocation: Geolocation) {
 
   }
@@ -23,10 +23,15 @@ export class MapPage {
   }
 
   ngOnInit(): void {
+    // M.Mapzen.apiKey = "mapzen-5ZktmUZ";
+    // var geocoder = M.Mapzen.geocoder();
+
     console.log(this.geolocation.getCurrentPosition());
-    this.map = L.map('map').setView([51.505, -0.09], 13);
+    this.map = L.map('map').setView([37.7749, -122.4194], 12);
     let map = this.map;
-    
+
+    // L.con`trol.geocoder('mapzen-5ZktmUZ').addTo(map);
+
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
     id: 'mapbox.streets',
