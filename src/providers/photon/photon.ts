@@ -37,7 +37,6 @@ export class PhotonProvider {
             //can make this an array
             this.sLat = data.features[0].geometry.coordinates[0];
             this.sLng = data.features[0].geometry.coordinates[1];
-         console.log("finding path between " + start + this.sLat + " and " + end + this.eLat);
 
         });
 
@@ -51,7 +50,8 @@ export class PhotonProvider {
             this.eLat = data.features[0].geometry.coordinates[0];
             this.eLng = data.features[0].geometry.coordinates[1];
             //3. 
-            resolve();
+            resolve(this.eLat);
+         console.log("finding path between " + start + this.sLat + " and " + end + this.eLat);
 
         });
         //2.

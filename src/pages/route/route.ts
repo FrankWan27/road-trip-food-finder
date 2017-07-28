@@ -28,8 +28,10 @@ export class RoutePage {
     let start = this.start;
     let end = this.end;
     let nav = this.navCtrl;
-    this.photon.searchRoute(start, end).then(function(){nav.push(MapPage)});
-
+    
+    let promise = this.photon.searchRoute(start, end);
+    promise.then(function(){nav.push(MapPage)});
+    
   }
 
 }

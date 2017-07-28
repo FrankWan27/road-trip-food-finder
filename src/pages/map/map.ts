@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PhotonProvider } from '../../providers/photon/photon';
-
 import L from 'leaflet';
 import 'leaflet-routing-machine'; 
 
@@ -15,7 +14,7 @@ export class MapPage {
 
   public map: any;
 
-  constructor(public navCtrl: NavController, public geolocation: Geolocation, public photon: PhotonProvider) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public geolocation: Geolocation, public photon: PhotonProvider) {
 
   }
   
@@ -40,21 +39,18 @@ export class MapPage {
   }
   
   ngOnInit(): void {
-    // M.Mapzen.apiKey = "mapzen-5ZktmUZ";
-    // var geocoder = M.Mapzen.geocoder();
+
     this.map = L.map('map').setView([37.7749, -122.4194], 12);
-    let map = this.map;
+    
+    let map = this.map; //actually cancer pls fix
+    let toastCtrl = this.toastCtrl; // same
 
-    // L.con`trol.geocoder('mapzen-5ZktmUZ').addTo(map);
-
+    //initalize map
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZnJhbmt3YW4yNyIsImEiOiJjajVrcGxrY3kyamlvMzJuem81dHA2dDB5In0.vraVi60phGPP7W46hBnvCA'
     }).addTo(map);
-    
-    // console.log(R);
-    // console.log(R.Routing);
 
     if(this.photon.sLng != undefined && this.photon.eLng != undefined)
       this.drawRoute();
@@ -70,8 +66,14 @@ export class MapPage {
         L.circle(e.latlng, radius).addTo(map);
     }
 
+
     function onLocationError(e) {
-      alert( "sad :( " + e.message);
+      let toast = toastCtrl.create({
+        message: "sad :( " + e.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
     }
   }
 }
