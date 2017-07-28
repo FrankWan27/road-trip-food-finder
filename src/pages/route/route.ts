@@ -18,7 +18,8 @@ export class RoutePage {
   
   autocomplete(e: any)
   {
-    this.photon.autocomplete(e.target.value);
+    if(e.target.value != undefined)
+      this.photon.autocomplete(e.target.value);
   }
 
   search()

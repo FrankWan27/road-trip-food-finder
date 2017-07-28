@@ -29,11 +29,11 @@ export class PhotonProvider {
           // and save the data for later reference
           this.data = data;
           resolve(this.data);
-          for(let i = 0; i < 10; i++)
+
+          for(let i = 0; i < this.data.features.length; i++)
           {
             let name = '', street = '', city = '', state = '', country = '';
 
-            
             if(this.data.features[i].properties.name != undefined)
               name = 'Name: ' + this.data.features[i].properties.name;
             
