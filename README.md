@@ -1,3 +1,6 @@
+Demo can be seen here:
+http://rikka.cf
+
 to run:
 
 ionic serve
