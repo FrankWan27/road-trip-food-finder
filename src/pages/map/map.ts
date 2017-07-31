@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { Events, NavController, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PhotonProvider } from '../../providers/photon/photon';
 import L from 'leaflet';
@@ -14,8 +14,11 @@ export class MapPage {
 
   public map: any;
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public geolocation: Geolocation, public photon: PhotonProvider) {
-
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public geolocation: Geolocation, public photon: PhotonProvider, public events:Events ) {
+    
+    events.subscribe('search', () => {
+      this.drawRoute();
+    });
   }
   
 
@@ -27,15 +30,18 @@ export class MapPage {
 
   drawRoute()
   {
-    console.log("START/END COORDS: " + this.photon.sLat + ", " + this.photon.sLng + " TO " + this.photon.eLat + ", " + this.photon.eLng);
-    //We use <any> to avoid typscript error Routing module not found
-    (<any>L).Routing.control({
+    console.log("START/END COORDS: " + this.photon.coords[0] + ", " + this.photon.coords[1] + " TO " + this.photon.coords[2] + ", " + this.photon.coords[3]);
+    
+    //We use <any> to avoid typescript error Routing module not found
+    let routing = (<any>L).Routing.control({
       waypoints:[
-        L.latLng(this.photon.sLng, this.photon.sLat),
-        L.latLng(this.photon.eLng, this.photon.eLat)
+        L.latLng(this.photon.coords[1], this.photon.coords[0]),
+        L.latLng(this.photon.coords[3], this.photon.coords[2])
       ],
       routeWhileDragging: true,
-    }).addTo(this.map);
+    });
+    routing.addTo(this.map);
+    console.log(routing);
   }
   
   ngOnInit(): void {
@@ -51,9 +57,6 @@ export class MapPage {
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZnJhbmt3YW4yNyIsImEiOiJjajVrcGxrY3kyamlvMzJuem81dHA2dDB5In0.vraVi60phGPP7W46hBnvCA'
     }).addTo(map);
-
-    if(this.photon.sLng != undefined && this.photon.eLng != undefined)
-      this.drawRoute();
 
     map.on('locationfound', onLocationFound);
     map.on('locationerror', onLocationError);

@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Events, NavController, ToastController } from 'ionic-angular';
 import { PhotonProvider } from '../../providers/photon/photon';
 import { MapPage } from '../map/map';
 
@@ -10,10 +10,11 @@ import { MapPage } from '../map/map';
 
 export class RoutePage {
 
+  map = MapPage;
   start: string = "";
   end: string = "";
 
-  constructor(public navCtrl: NavController, public photon: PhotonProvider) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public photon: PhotonProvider, public events:Events) {
 
 
   }
@@ -27,11 +28,27 @@ export class RoutePage {
   {
     let start = this.start;
     let end = this.end;
-    let nav = this.navCtrl;
-    
-    let promise = this.photon.searchRoute(start, end);
-    promise.then(function(){nav.push(MapPage)});
-    
+    let events = this.events;
+
+    let toast = this.toastCtrl.create({
+        message: "Starting or End Destination is Empty!",
+        duration: 3000,
+        position: 'top'
+      });
+
+    if(start == "" || end == "")
+      toast.present();
+    else
+    {
+      //go to map page
+      this.navCtrl.parent.select(1); 
+
+      let promise = this.photon.searchRoute(start, end);
+      promise.then(function(){
+        events.publish('search');
+      });
+
+    }
   }
 
 }
