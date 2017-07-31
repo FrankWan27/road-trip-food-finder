@@ -13,6 +13,7 @@ import 'leaflet-routing-machine';
 export class MapPage {
 
   public map: any;
+  public currentRoute: any;
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public geolocation: Geolocation, public photon: PhotonProvider, public events:Events ) {
     
@@ -31,17 +32,17 @@ export class MapPage {
   drawRoute()
   {
     console.log("START/END COORDS: " + this.photon.coords[0] + ", " + this.photon.coords[1] + " TO " + this.photon.coords[2] + ", " + this.photon.coords[3]);
-    
+    if(this.currentRoute != undefined)
+      this.currentRoute.remove();
     //We use <any> to avoid typescript error Routing module not found
-    let routing = (<any>L).Routing.control({
+    this.currentRoute = (<any>L).Routing.control({
       waypoints:[
         L.latLng(this.photon.coords[1], this.photon.coords[0]),
         L.latLng(this.photon.coords[3], this.photon.coords[2])
       ],
       routeWhileDragging: true,
     });
-    routing.addTo(this.map);
-    console.log(routing);
+    this.currentRoute.addTo(this.map);
   }
   
   ngOnInit(): void {
