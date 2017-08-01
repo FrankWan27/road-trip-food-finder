@@ -21,8 +21,7 @@ Fixes:
 - When impossible route, routing machine will error. Notify User
 - Fix workaround in ngOnInit declaring let var = this.var because of
   function scope (in search() too)
-- Remove routes from map
-
+- Move +/- zoom buttons down
 Improvements:
 - Figure out what to do with directions (Leaflet.Routing.Itinerary)
 - Drop down menu for autocomplete (can select from and replaces query)

@@ -41,7 +41,6 @@ $colors: (
   dark:       #222
 );
 
-
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
@@ -52,8 +51,9 @@ $colors: (
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
-
+$searchbar-md-padding-top: 0px;
+$searchbar-wp-padding-top: 0px;
+$searchbar-ios-padding-vertical: 0px;	
 
 
 // App Windows Variables

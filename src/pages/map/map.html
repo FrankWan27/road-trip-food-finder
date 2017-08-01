@@ -1,16 +1,21 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title>
       Map
     </ion-title>
     <ion-buttons end>
- 		 <!-- <button ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button> -->
+ 		 <button ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
+
 
 <ion-content>
+
   <div style="position:absolute; height:100%; width:100%" id="map">
-  	<button style="z-index:5000; position: absolute; left: 10px; bottom:10px" ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
+  <ion-item no-lines style="z-index:5000; position: absolute; background-color: rgba(0, 0, 0, 0)">
+    <ion-searchbar placeholder="Starting Point" [(ngModel)]="start" (ionInput)="autocomplete($event)"></ion-searchbar>
+  </ion-item>  	
+  <button style="z-index:5000; position: absolute; left: 10px; bottom:10px" ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
   </div>
 </ion-content>
