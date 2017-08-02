@@ -13,15 +13,63 @@ export class RoutePage {
   map = MapPage;
   start: string = "";
   end: string = "";
+  places: string[] = [];
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public photon: PhotonProvider, public events:Events) {
 
 
   }
-  autocomplete(e: any)
-  {
-    if(e.target.value != undefined)
-      this.photon.autocomplete(e.target.value);
+
+  autocomplete(e: any) {
+    if (e.target.value != undefined) {
+      this.photon.autocomplete(e.target.value).then(
+        data => {
+          // clear array
+          this.places.length = 0;
+
+          // don't know why i can't use data.features
+          for (let i = 0; i < data["features"].length; i++) {
+            // save some space
+            let place = data["features"][i].properties;
+
+            // string to save
+            let string = "";
+
+            if (place.name != undefined) {
+              string += place.name;
+              string += ", ";
+            }
+
+            if (place.street != undefined) {
+              string += place.street;
+              string += ", ";
+            }
+
+            if (place.city != undefined) {
+              string += place.city;
+              string += ", ";
+            }
+
+            if (place.state != undefined) {
+              string += place.state;
+              string += ", ";
+            }
+
+            if (place.country != undefined) {
+              string += place.country;
+            }
+
+            // add to array
+            this.places[i] = string;
+          }
+        }
+      );
+    }
+  }
+
+  replaceQuery(e: any) {
+    this.start = e.srcElement.innerText;
+    this.places.length = 0;
   }
 
   search()

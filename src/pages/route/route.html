@@ -1,4 +1,4 @@
-<ion-header>
+﻿<ion-header>
   <ion-navbar>
     <ion-title>Enter Your Route</ion-title>
   </ion-navbar>
@@ -20,6 +20,11 @@
     
     <ion-item>
       <ion-searchbar placeholder="Starting Point" animated=true [(ngModel)]="start" (ionInput)="autocomplete($event)"></ion-searchbar>
+      <ion-list>
+        <ion-item (click)="replaceQuery($event)" *ngFor="let place of places">
+          {{ place }}
+        </ion-item>
+      </ion-list>
     </ion-item>
     
     <ion-item>
