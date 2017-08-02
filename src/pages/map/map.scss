@@ -1,6 +1,16 @@
+#search {
+	z-index:5000; 
+	position: absolute; 
+	background-color: rgba(0, 0, 0, 0);
+}
 
-
+#suggestions {
+	z-index:5000; 
+	background-color: rgba(240, 240, 240, 100);
+	top:68px;
+}
 page-map {
+
 }
 
 .leaflet-routing-container {
