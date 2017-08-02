@@ -12,13 +12,22 @@
       menuToggle>
       <ion-icon name="arrow-round-back"></ion-icon>
     </button>
-
-      <ion-searchbar no-lines
-        placeholder="Search here"
-        [(ngModel)]="start" 
-        (ionInput)="autocomplete($event)" 
-        (ionFocus)="searchFocus()" >
-      </ion-searchbar>
+    
+    <ion-searchbar
+      style="display:none"
+      id="origin"
+      placeholder="Origin"
+      [(ngModel)]="start" 
+      (ionInput)="autocomplete($event)" 
+      (click)="bar = 0" >
+    </ion-searchbar>
+    
+    <ion-searchbar
+      placeholder="Destination"
+      [(ngModel)]="end" 
+      (ionInput)="autocomplete($event)" 
+      (click)="searchFocus(); bar = 1" >
+    </ion-searchbar>
   </ion-navbar>
 </ion-header>
 
@@ -41,7 +50,7 @@
       <ion-list>
         <ion-item 
           id="suggestions" 
-          (click)="replaceQuery($event); gebak()" 
+          (click)="replaceQuery($event)" 
           *ngFor="let place of places">
             {{ place }}
         </ion-item>

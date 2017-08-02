@@ -11,7 +11,7 @@ import { MapPage } from '../map/map';
 export class RoutePage {
 
   map = MapPage;
-  start: string = "";
+  start: string = "My Location";
   end: string = "";
   places: string[] = [];
 
@@ -81,15 +81,18 @@ export class RoutePage {
     let toast = this.toastCtrl.create({
         message: "Starting or End Destination is Empty!",
         duration: 3000,
-        position: 'top'
+        position: 'bottom'
       });
+    if(start == "My Location" && end != "")
+    {
 
+    }
     if(start == "" || end == "")
       toast.present();
     else
     {
       //go to map page
-      this.navCtrl.parent.select(1); 
+      //this.navCtrl.parent.select(1); 
 
       let promise = this.photon.searchRoute(start, end);
       promise.then(function(){

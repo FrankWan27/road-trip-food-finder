@@ -12,11 +12,11 @@ import * as $ from 'jquery';
 })
 
 export class MapPage {
-
+  public bar: any = 0;
   public map: any;
   public currentRoute: any;
   places: string[] = [];
-  start: string = "";
+  start: string = "My Location";
   end: string = "";
   
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, public geolocation: Geolocation, public photon: PhotonProvider, public events:Events ) {
@@ -74,8 +74,39 @@ export class MapPage {
   }
 
   replaceQuery(e: any) {
-    this.start = e.srcElement.innerText;
+    //bar: 0 = origin, bar: 1 = destination
+    if(this.bar == 0)
+      this.start = e.srcElement.innerText;
+    else
+      this.end = e.srcElement.innerText;
     this.places.length = 0;
+  }
+
+  search()
+  {
+    let start = this.start;
+    let end = this.end;
+    let events = this.events;
+
+    let toast = this.toastCtrl.create({
+        message: "Starting or End Destination is Empty!",
+        duration: 3000,
+        position: 'bottom'
+      });
+
+    if(start == "" || end == "")
+      toast.present();
+    else
+    {
+      //go to map page
+      // this.navCtrl.parent.select(1); 
+
+      let promise = this.photon.searchRoute(start, end);
+      promise.then(function(){
+        events.publish('search');
+      });
+
+    }
   }
 
   gebak()
@@ -85,6 +116,8 @@ export class MapPage {
     $('#list').animate({'top': '100vh'}, {duration : 400});
     $('#menu').show();
     $('#back').hide();
+    $('#origin').hide();
+
   }
 
   // searchBlur()
@@ -103,6 +136,7 @@ export class MapPage {
     $('#list').animate({'top': '0px'}, {duration : 400});
     $('#menu').hide();
     $('#back').show();
+    $('#origin').show();
   }
 
   findLocation()
@@ -156,7 +190,7 @@ export class MapPage {
       let toast = toastCtrl.create({
         message: "sad :( " + e.message,
         duration: 3000,
-        position: 'top'
+        position: 'bottom'
       });
       toast.present();
     }
