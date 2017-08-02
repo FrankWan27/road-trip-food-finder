@@ -45,22 +45,22 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
+$searchbar-ios-border-color: rgba(0, 0, 0, 0);
 
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-$searchbar-md-padding-top: 0px;
-$searchbar-wp-padding-top: 0px;
-$searchbar-ios-padding-vertical: 0px;	
+$searchbar-md-input-border-radius: 0px;
 
 
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
-
+$searchbar-wp-border-width: 0px;
+$searchbar-wp-input-search-icon-size: 0px;
 
 
 // App Theme

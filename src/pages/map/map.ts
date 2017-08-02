@@ -78,17 +78,31 @@ export class MapPage {
     this.places.length = 0;
   }
 
-
-  searchBlur()
+  gebak()
   {
-    document.getElementById("search").style.backgroundColor = "rgba(240, 240, 240, 0)";
+    $('#search').css('background-color', "rgba(250, 250, 250, 0)");
+    $('#locate').show();
     $('#list').animate({'top': '100vh'}, {duration : 400});
+    $('#menu').show();
+    $('#back').hide();
   }
+
+  // searchBlur()
+  // {
+  //   $('#search').css('background-color', "rgba(250, 250, 250, 0)");
+  //   $('#locate').show();
+  //   $('#list').animate({'top': '100vh'}, {duration : 400});
+  //   $('#menu').show();
+  //   $('#back').hide();
+  // }
 
   searchFocus()
   {
-    document.getElementById("search").style.backgroundColor = "rgba(240, 240, 240, 100)";
+    $('#search').css('background-color', "rgba(250, 250, 250, 100)");
+    $('#locate').hide();
     $('#list').animate({'top': '0px'}, {duration : 400});
+    $('#menu').hide();
+    $('#back').show();
   }
 
   findLocation()

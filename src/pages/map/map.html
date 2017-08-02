@@ -1,28 +1,58 @@
-<!-- <ion-header>
+<ion-header>
   <ion-navbar>
-    <ion-title>
-      Map
-    </ion-title>
-    <ion-buttons end>
- 		 <button ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
-    </ion-buttons>
+    <button id="menu" ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  
+    <button 
+      style="display:none" 
+      id="back" 
+      (click)="gebak()"
+      ion-button 
+      menuToggle>
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+
+      <ion-searchbar no-lines
+        placeholder="Search here"
+        [(ngModel)]="start" 
+        (ionInput)="autocomplete($event)" 
+        (ionFocus)="searchFocus()" >
+      </ion-searchbar>
   </ion-navbar>
-</ion-header> -->
+</ion-header>
+
 
 
 <ion-content>
 
   <div style="position:absolute; height:100%; width:100%" id="map">
-    <ion-item id="search" no-lines>
-      <ion-searchbar  placeholder="Search here" [(ngModel)]="start" (ionInput)="autocomplete($event)" (ionFocus)="searchFocus()" (ionBlur)="searchBlur()"></ion-searchbar>
-    </ion-item>
+<!--     <ion-item id="search" no-lines>
+      <ion-searchbar 
+        style="right:0; width:90vw" 
+        placeholder="Search here"
+        [(ngModel)]="start" 
+        (ionInput)="autocomplete($event)" 
+        (ionFocus)="searchFocus()" 
+        (ionBlur)="searchBlur()">
+      </ion-searchbar>
+    </ion-item> -->
     <div id="list">
       <ion-list>
-        <ion-item id="suggestions" (click)="replaceQuery($event)" *ngFor="let place of places">
-          {{ place }}
+        <ion-item 
+          id="suggestions" 
+          (click)="replaceQuery($event); gebak()" 
+          *ngFor="let place of places">
+            {{ place }}
         </ion-item>
       </ion-list>
     </div>
-    <button style="z-index:5000; position: absolute; left: 10px; bottom:10px" ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
+    <button 
+      style="z-index:5000; position: absolute; left: 10px; bottom:10px" 
+      id="locate" 
+      ion-button 
+      (click)="findLocation()">
+      <ion-icon name="locate"></ion-icon>
+    </button>
   </div>
 </ion-content>
