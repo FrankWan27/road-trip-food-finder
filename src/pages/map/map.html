@@ -17,11 +17,11 @@
       <ion-searchbar  placeholder="Search here" [(ngModel)]="start" (ionInput)="autocomplete($event)" (ionFocus)="searchFocus()" (ionBlur)="searchBlur()"></ion-searchbar>
     </ion-item>
     <div id="list">
-    <ion-list>
-      <ion-item id="suggestions" (click)="replaceQuery($event)" *ngFor="let place of places">
-        {{ place }}
-      </ion-item>
-    </ion-list>
+      <ion-list>
+        <ion-item id="suggestions" (click)="replaceQuery($event)" *ngFor="let place of places">
+          {{ place }}
+        </ion-item>
+      </ion-list>
     </div>
     <button style="z-index:5000; position: absolute; left: 10px; bottom:10px" ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
   </div>

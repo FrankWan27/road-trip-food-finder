@@ -1,7 +1,15 @@
 #search {
-	z-index:5000; 
+	z-index:6000; 
 	position: absolute; 
 	background-color: rgba(0, 0, 0, 0);
+}
+
+#list {
+	z-index: 5000;
+	position: absolute;
+	background-color: rgba(240, 240, 240, 100);
+	width:100vw;
+	height:100vh;
 }
 
 #suggestions {
@@ -9,6 +17,7 @@
 	background-color: rgba(240, 240, 240, 100);
 	top:68px;
 }
+
 page-map {
 
 }

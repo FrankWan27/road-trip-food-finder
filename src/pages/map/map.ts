@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { PhotonProvider } from '../../providers/photon/photon';
 import L from 'leaflet';
 import 'leaflet-routing-machine'; 
+import * as $ from 'jquery';
 
 @Component({
   selector: 'page-map',
@@ -24,7 +25,7 @@ export class MapPage {
       this.drawRoute();
     });
   }
-  
+ 
   autocomplete(e: any) {
     if (e.target.value != undefined) {
       this.photon.autocomplete(e.target.value).then(
@@ -81,13 +82,13 @@ export class MapPage {
   searchBlur()
   {
     document.getElementById("search").style.backgroundColor = "rgba(240, 240, 240, 0)";
-    document.getElementById("list").style.display = "none";
+    $('#list').animate({'top': '100vh'}, {duration : 400});
   }
 
   searchFocus()
   {
     document.getElementById("search").style.backgroundColor = "rgba(240, 240, 240, 100)";
-    document.getElementById("list").style.display = "inline";
+    $('#list').animate({'top': '0px'}, {duration : 400});
   }
 
   findLocation()
