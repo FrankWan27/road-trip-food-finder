@@ -10,13 +10,11 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class PhotonProvider {
-  public sLat: any;
-  public sLng: any;
-  public eLat: any;
-  public eLng: any;
+  
+  public coords: any;
 
   constructor(public http: Http) {
-
+    this.coords = [];
   }
 
   searchRoute(start: any, end: any) {
@@ -35,8 +33,8 @@ export class PhotonProvider {
 
 
             //can make this an array
-            this.sLat = data.features[0].geometry.coordinates[0];
-            this.sLng = data.features[0].geometry.coordinates[1];
+            this.coords[0] = data.features[0].geometry.coordinates[0];
+            this.coords[1] = data.features[0].geometry.coordinates[1];
 
         });
 
@@ -47,11 +45,11 @@ export class PhotonProvider {
             console.log(data.features[0].geometry.coordinates[0]);
             console.log(data.features[0].geometry.coordinates[1]);
             //can make this an array
-            this.eLat = data.features[0].geometry.coordinates[0];
-            this.eLng = data.features[0].geometry.coordinates[1];
+            this.coords[2] = data.features[0].geometry.coordinates[0];
+            this.coords[3] = data.features[0].geometry.coordinates[1];
             //3. 
-            resolve(this.eLat);
-         console.log("finding path between " + start + this.sLat + " and " + end + this.eLat);
+            resolve(this.coords);
+         console.log("finding path between these coords: " + this.coords);
 
         });
         //2.
@@ -68,7 +66,7 @@ export class PhotonProvider {
       // We're using Angular HTTP provider to request the data,
       // then on the response, it'll map the JSON data to a parsed JS object.
       // Next, we process the data and resolve the promise with the new data.
-      this.http.get('https://photon.komoot.de/api/?q=' + query + '&limit=10')
+      this.http.get('https://photon.komoot.de/api/?q=' + query + '&limit=30')
         .map(res => res.json())
         .subscribe(data => {
           // we've got back the raw data, now generate the core schedule data

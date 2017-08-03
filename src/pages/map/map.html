@@ -1,16 +1,68 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Map
-    </ion-title>
-    <ion-buttons end>
- 		 <!-- <button ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button> -->
-    </ion-buttons>
+    <button id="menu" ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  
+    <button 
+      style="display:none" 
+      id="back" 
+      (click)="gebak()"
+      ion-button 
+      menuToggle>
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
+    
+    <ion-searchbar
+      style="display:none"
+      id="origin"
+      placeholder="Origin"
+      [(ngModel)]="start" 
+      (ionInput)="autocomplete($event)" 
+      (click)="bar = 0" >
+    </ion-searchbar>
+    
+    <ion-searchbar
+      placeholder="Destination"
+      [(ngModel)]="end" 
+      (ionInput)="autocomplete($event)" 
+      (click)="searchFocus();bar=1" >
+    </ion-searchbar>
   </ion-navbar>
 </ion-header>
 
+
+
 <ion-content>
+
+<div id="list">
+    <ion-list>
+      <ion-item 
+        id="suggestions" 
+        (click)="replaceQuery($event)" 
+        *ngFor="let place of places">
+          {{ place }}
+      </ion-item>
+    </ion-list>
+  </div>
   <div style="position:absolute; height:100%; width:100%" id="map">
-  	<button style="z-index:5000; position: absolute; left: 10px; bottom:10px" ion-button (click)="findLocation()"><ion-icon name="locate"></ion-icon></button>
+<!--     <ion-item id="search" no-lines>
+      <ion-searchbar 
+        style="right:0; width:90vw" 
+        placeholder="Search here"
+        [(ngModel)]="start" 
+        (ionInput)="autocomplete($event)" 
+        (ionFocus)="searchFocus()" 
+        (ionBlur)="searchBlur()">
+      </ion-searchbar>
+    </ion-item> -->
+    
+    <button 
+      style="z-index:5000; position: absolute; left: 10px; bottom:10px" 
+      id="locate" 
+      ion-button 
+      (click)="findLocation()">
+      <ion-icon name="locate"></ion-icon>
+    </button>
   </div>
 </ion-content>

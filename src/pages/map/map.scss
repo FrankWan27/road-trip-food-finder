@@ -1,3 +1,25 @@
+﻿#search {
+	z-index:6000; 
+	position: absolute; 
+	background-color: rgba(0, 0, 0, 0);
+	height:68px;
+}
+
+#list {
+  margin-top: 48px;
+	z-index: 5000;
+	position: absolute;
+	background-color: rgba(250, 250, 250, 100);
+	width:100vw;
+	height:100vh;
+}
+
+#suggestions {
+	z-index:5000; 
+	background-color: rgba(250, 250, 250, 100);
+	/*top:68px;*/
+}
+
 page-map {
 
 }

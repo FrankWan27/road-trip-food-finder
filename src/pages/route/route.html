@@ -1,4 +1,4 @@
-<ion-header>
+﻿<ion-header>
   <ion-navbar>
     <ion-title>Enter Your Route</ion-title>
   </ion-navbar>
@@ -19,7 +19,12 @@
     </ion-item> -->
     
     <ion-item>
-      <ion-searchbar placeholder="Starting Point" [(ngModel)]="start" (ionInput)="autocomplete($event)"></ion-searchbar>
+      <ion-searchbar placeholder="Starting Point" animated=true [(ngModel)]="start" (ionInput)="autocomplete($event)"></ion-searchbar>
+      <ion-list>
+        <ion-item (click)="replaceQuery($event)" *ngFor="let place of places">
+          {{ place }}
+        </ion-item>
+      </ion-list>
     </ion-item>
     
     <ion-item>
@@ -29,6 +34,7 @@
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" block (click)="search()">Search</button>
+  
+    <button  ion-button color="primary" block (click)="search()">Search</button>
   </div>
 </ion-content>
