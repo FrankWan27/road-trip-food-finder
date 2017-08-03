@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { Events, NavController, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PhotonProvider } from '../../providers/photon/photon';
@@ -80,6 +80,8 @@ export class MapPage {
     else
       this.end = e.srcElement.innerText;
     this.places.length = 0;
+
+    $('#list').animate({ 'top': '100vh' }, { duration: 400 });
   }
 
   search()
