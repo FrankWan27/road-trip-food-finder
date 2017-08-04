@@ -27,6 +27,7 @@ export class MapPage {
   }
  
   autocomplete(e: any) {
+    console.log(e);
     if (e.target.value != undefined) {
       this.photon.autocomplete(e.target.value).then(
         data => {
@@ -80,11 +81,9 @@ export class MapPage {
     else
       this.end = e.srcElement.innerText;
     this.places.length = 0;
-
-    $('#list').animate({ 'top': '100vh' }, { duration: 400 });
   }
 
-  search()
+  search(e: any)
   {
     let start = this.start;
     let end = this.end;
@@ -115,7 +114,7 @@ export class MapPage {
   {
     $('#search').css('background-color', "rgba(250, 250, 250, 0)");
     $('#locate').show();
-    $('#list').animate({'top': '100vh'}, {duration : 400});
+    $('#list').animate({'top': '100vh'}, 400, function() {$('#list').hide();});
     $('#menu').show();
     $('#back').hide();
     $('#origin').hide();
@@ -136,6 +135,7 @@ export class MapPage {
     $('#search').css('background-color', "rgba(250, 250, 250, 100)");
     $('#locate').hide();
     $('#list').animate({'top': '0px'}, {duration : 400});
+    $('#list').show();
     $('#menu').hide();
     $('#back').show();
     $('#origin').show();

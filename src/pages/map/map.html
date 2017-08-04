@@ -19,14 +19,15 @@
       placeholder="Origin"
       [(ngModel)]="start" 
       (ionInput)="autocomplete($event)" 
-      (click)="bar = 0" >
+      (ionFocus)="bar = 0" >
     </ion-searchbar>
     
     <ion-searchbar
       placeholder="Destination"
       [(ngModel)]="end" 
-      (ionInput)="autocomplete($event)" 
-      (click)="searchFocus();bar=1" >
+      (ionInput)="autocomplete($event)"
+      (keyup.enter)="search($event); gebak()" 
+      (ionFocus)="searchFocus();bar=1" >
     </ion-searchbar>
   </ion-navbar>
 </ion-header>
