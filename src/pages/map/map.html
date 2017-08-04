@@ -1,17 +1,17 @@
-<ion-header>
+﻿<ion-header>
   <ion-navbar>
     <button id="menu" ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-  
-    <button 
-      style="display:none" 
-      id="back" 
-      (click)="gebak()"
-      ion-button 
-      menuToggle>
-      <ion-icon name="arrow-round-back"></ion-icon>
-    </button>
+    
+    <ion-buttons left>
+      <button style="display:none"
+              id="back"
+              (click)="gebak()"
+              ion-button>
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
     
     <ion-searchbar
       style="display:none"
@@ -21,7 +21,7 @@
       (ionInput)="autocomplete($event)" 
       (ionFocus)="bar = 0" >
     </ion-searchbar>
-    
+
     <ion-searchbar
       placeholder="Destination"
       [(ngModel)]="end" 
