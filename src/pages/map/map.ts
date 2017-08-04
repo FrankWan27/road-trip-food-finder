@@ -81,6 +81,8 @@ export class MapPage {
     else
       this.end = e.srcElement.innerText;
     this.places.length = 0;
+
+    this.gebak();
   }
 
   search(e: any)
