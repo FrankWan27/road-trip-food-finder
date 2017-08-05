@@ -1,5 +1,11 @@
 {
   "name": "road-trip-food-finder",
   "app_id": "60ca9949",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/auto",
+      "proxyUrl": "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+    }
+  ]
 }
