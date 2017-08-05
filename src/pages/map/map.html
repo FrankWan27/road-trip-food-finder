@@ -26,7 +26,7 @@
       placeholder="Destination"
       [(ngModel)]="end" 
       (ionInput)="autocomplete($event)"
-      (keyup.enter)="search($event); gebak()" 
+      (keyup.enter)="search(); gebak()" 
       (ionFocus)="searchFocus();bar=1" >
     </ion-searchbar>
   </ion-navbar>

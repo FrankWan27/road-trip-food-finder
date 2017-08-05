@@ -82,10 +82,14 @@ export class MapPage {
       this.end = e.srcElement.innerText;
     this.places.length = 0;
 
-    this.gebak();
+    if(this.start != "" && this.end != "")
+    {
+      this.search();
+      this.gebak();
+    }
   }
 
-  search(e: any)
+  search()
   {
     let start = this.start;
     let end = this.end;
