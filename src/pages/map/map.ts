@@ -157,12 +157,25 @@ export class MapPage {
     if(this.currentRoute != undefined)
       this.currentRoute.remove();
     //We use <any> to avoid typescript error Routing module not found
+
+    // fsr 'this' changes within the below so set current to be accessible
+    let mpage = this;
+
     this.currentRoute = (<any>L).Routing.control({
       waypoints:[
         L.latLng(this.photon.coords[1], this.photon.coords[0]),
         L.latLng(this.photon.coords[3], this.photon.coords[2])
       ],
       routeWhileDragging: true,
+      defaultErrorHandler: function (e) {
+        let toast = mpage.toastCtrl.create({
+          message: e.error.message,
+          duration: 3000,
+          position: 'bottom'
+        });
+
+        toast.present();
+      },
     });
     this.currentRoute.addTo(this.map);
   }
